@@ -1,20 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Body Mass Index
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div>
+    <ion-item>
+      <ion-text>
+        <h5>Please enter your weight in kilograms and your height in cemtimeters below.</h5>
+      </ion-text>
+    </ion-item>
+  </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Weight in kg</ion-label>
+      <ion-select placeholder="Select weight" formControlName="weight">
+        <ion-select-option type="number" *ngFor="let weight of weights" value="{{weight}}">{{weight}} kg</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Height in cm</ion-label>
+      <ion-select placeholder="Select height" formControlName="height">
+        <ion-select-option *ngFor="let height of heights" value="{{height}}">{{height}} cm</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-text>
+        <h1>{{ bmi }}</h1>
+        <h2>{{ message }}</h2>
+      </ion-text>
+    </ion-card-header>
+  </ion-card>
+  <div class="buttons">
+    <ion-button color="primary" class="calculateButton" expand="block" fill="solid" (click)="onSubmit()" [routerLink]="['/bmi-details']"
+      [disabled]="!form.valid">Calculate</ion-button>
+    <!-- <ion-button color="danger" class="calculateButton" expand="block" fill="solid" (click)="onReset()">Reset</ion-button> -->
   </div>
 </ion-content>

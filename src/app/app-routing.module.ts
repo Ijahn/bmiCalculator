@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'bmi-details',
+    loadChildren: () => import('./bmi-details/bmi-details.module').then( m => m.BmiDetailsPageModule)
+  },
 ];
 
 @NgModule({
